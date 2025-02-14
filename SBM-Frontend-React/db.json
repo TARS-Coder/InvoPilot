@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+      "uid": 1,
+      "title": "Helix",
+      "hsn_code": 98102,
+      "tax_slab": 2,
+      "is_available": false,
+      "id": "6f98"
+    },
+    {
+      "uid": 2,
+      "title": "Unicorn",
+      "hsn_code": 97532,
+      "tax_slab": 2,
+      "is_available": true,
+      "id": "f02c"
+    },
+    {
+      "uid": 3,
+      "title": "Thunder",
+      "hsn_code": 12424,
+      "tax_slab": 1,
+      "is_available": true,
+      "id": "c3b2"
+    },
+    {
+      "id": "5178",
+      "uid": 123,
+      "title": "Deep",
+      "hsn_code": 23,
+      "tax_slab": 4,
+      "is_available": false
+    },
+    {
+      "id": "49f0",
+      "uid": 234,
+      "title": "Test product",
+      "hsn_code": 345678,
+      "tax_slab": 5,
+      "is_available": false
+    }
+  ]
+}

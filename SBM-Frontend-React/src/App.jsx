@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import TitleComponent from './components'
 
+//import { balloons } from "balloons-js";
+//balloons();
+
 const Hello = ({name,age}) => {
   // Name and age items of props object are destructured
   // Component helper function

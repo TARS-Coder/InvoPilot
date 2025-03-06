@@ -10,27 +10,47 @@ const getAll = () => {
     const request = axios.get(baseUrl)
     const nonExist = {
         "uid": 12,
-        "title": "Scrambler",
+        "title": "Ducati",
         "hsn_code": 97532,
         "tax_slab": 2,
         "is_available": true,
         "id": 23
       }
-    return request.then(response => response.data.concat(nonExist))
+//    return request.then(response => response.data.concat(nonExist))
+      return request.then(response => response.data)
 }
 
-const addProduct = (data) => {
+const addProduct = async (data) => {
     const request = axios.post(baseUrl, data)
-    return request.then(response => response.data)
+    try {
+        const response = await request
+        return response.data
+    } catch (error) {
+        return error.response;
+    }
 }
 
-const toggleAvailabilty = (id,changeProduct) => {
-    const url = `http://localhost:8080/api/products/${id}`;
+const updateProduct = async (id,changeProduct) => {
+    const url = `${baseUrl}/${id}`
 
     const request = axios.put(url, changeProduct)
-    return request.then(response => response.data)
+    const response = await request;
+    return response.data;
 
 }
 
+const deleteProduct = async (id) => {
+    const url = `${baseUrl}/${id}`
+
+    const request = axios.delete(url)
+    try {
+        const response = await request;
+        return response;
+    } catch (error) {
+        return error.response
+    }
+}
+
+
 // export default {    getAll: getAll, addProduct: addProduct}
-export default { getAll, addProduct, toggleAvailabilty}
+export default { getAll, addProduct, updateProduct, deleteProduct}

@@ -1,7 +1,7 @@
 import React, { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router";
 import Invoices from "./Invoices";
 import Products from "./Products";
 import Header from "./components/Header";
@@ -33,7 +33,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Header />
         <div className="background">
           <Routes>
-            <Route path="/" element={<h1>Welcome to Billing App</h1>} />
+            <Route index path="/" element={<h1>Welcome to Billing App</h1>} />
             <Route path="/products" element={<Products />} />
             <Route path="/invoices" element={<Invoices />} />
           </Routes>

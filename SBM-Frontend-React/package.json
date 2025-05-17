@@ -20,7 +20,9 @@
     "npm": "^10.8.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^7.2.0"
+    "react-number-format": "^5.4.3",
+    "react-router-dom": "^7.2.0",
+    "react-to-print": "2.14.8"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

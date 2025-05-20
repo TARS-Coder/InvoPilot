@@ -1,0 +1,7 @@
+{
+  "name": "InvoPilot",
+  "scripts": {
+    "build-all": "npm ci --prefix frontend && npm run build --prefix frontend && npm ci --prefix backend && mkdir -p backend/public && rm -rf backend/public/* && cp -r frontend/dist/* backend/public",
+    "start": "npm start --prefix backend"
+  }
+}

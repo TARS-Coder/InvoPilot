@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && mkdir -p ../backend/public && rm  -rf ../backend/public/* && cp -r dist/* ../backend/public",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "server": "json-server -p3001 --watch db.json"
+    "server": "json-server -p3001 --watch db.json",
+    "postinstall": "npm run build && mkdir -p ../backend/public && rm  -rf ../backend/public/* && cp -r dist/* ../backend/public"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

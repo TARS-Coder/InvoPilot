@@ -13,7 +13,7 @@ const logger = createLogger({
   transports: [new transports.Console()]
 });
 
-app.use(express.static('dist'))
+app.use(express.static('public'))
 
 const cors = require('cors')
 app.use(cors())

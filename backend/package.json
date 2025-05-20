@@ -1,12 +1,13 @@
 {
   "name": "SB Moters Backend",
-  "version": "0.0.1",
-  "description": "This is Zero version for the Billing App",
+  "version": "1.0.0",
+  "description": "S.B. Moters Backend",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "mkdir -p public && rm -rf public/* && cp -r ../frontend/dist/* public"
   },
   "author": "TARS",
   "license": "MIT",

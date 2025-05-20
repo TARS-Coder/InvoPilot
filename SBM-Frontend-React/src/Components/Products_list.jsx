@@ -11,18 +11,24 @@ import EditIcon from "@mui/icons-material/Edit"
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 const categories = [
-    { value: 'part', label: 'Part' },
-    { value: 'bike', label: 'Bike' },
-    { value: 'undefined', label: 'Undefined' },
-]
+  { value: 'part', label: 'Part' },
+  { value: 'bike', label: 'Bike' },
+  { value: 'undefined', label: 'Undefined' },
+  { value: 'accessory', label: 'Accessory' },
+  { value: 'electric', label: 'Electric' },
+  { value: 'maintenance', label: 'Maintenance' },
+];
 
 const brands = [
-    { value: 'bajaj', label: 'Bajaj' },
-    { value: 'hero', label: 'Hero Moters' },
-    { value: 'honda', label: 'Honda' },
-    { value: 'triumph', label: 'Triumph' },
-    { value: 'undefined', label: 'Undefined' },
-]
+  { value: 'bajaj', label: 'Bajaj' },
+  { value: 'hero', label: 'Hero Moters' },
+  { value: 'honda', label: 'Honda' },
+  { value: 'triumph', label: 'Triumph' },
+  { value: 'undefined', label: 'Undefined' },
+  { value: 'royal enfield', label: 'Royal Enfield' },
+  { value: 'yamaha', label: 'Yamaha' },
+  { value: 'ktm', label: 'KTM' },
+];
 
 const tax_slab = [0, 5, 12, 18, 24]
 

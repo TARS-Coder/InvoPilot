@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Container, Typography } from "@mui/material";
-import InvoicesList from "./Components/InvoicesList";
-import InvoicesCreationDialog from "./Components/InvoicesCreationDialog";
+import InvoicesList from "./components/InvoicesList";
+import InvoicesCreationDialog from "./components/InvoicesCreationDialog";
 import invoicesActions from "./actions/invoicesActions";
 
 const Invoices = () => {

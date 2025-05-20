@@ -1,44 +1,46 @@
-import React, { StrictMode } from "react";
+import React, { StrictMode, useState, useMemo } from "react";
 import ReactDOM from "react-dom/client";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import Invoices from "./Invoices";
 import Products from "./Products";
 import Header from "./components/Header";
-//import "./index.css";
+import "./styles/overrides.css"
 
-// Create a custom Material UI theme
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#1976d2", // Default blue
-    },
-    secondary: {
-      main: "#ff9800", // Orange
-    },
-    background: {
-      default: "#f4f4f4", // Light gray background
-    },
-  },
-  typography: {
-    fontFamily: "Arial, sans-serif",
-  },
-});
+function App() {
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <StrictMode>
+const [darkMode, setDarkMode]= useState(false)
+
+function toggleTheme() {
+  darkMode ? setDarkMode(false) : setDarkMode(true)
+}
+
+const theme = useMemo(() =>
+  createTheme({
+    palette: {
+      mode: darkMode ? "dark" : "light"
+  },
+  }),[darkMode])
+
+  return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <Header />
+        <Header mode={darkMode} toggleTheme={toggleTheme}/>
         <div className="background">
           <Routes>
-            <Route index path="/" element={<h1>Welcome to Billing App</h1>} />
+            <Route index path="/" element={<h1 style={ {textAlign: "center"}}>Welcome to S.B. Moters Digital Invoicing Dashboard</h1>} />
             <Route path="/products" element={<Products />} />
             <Route path="/invoices" element={<Invoices />} />
           </Routes>
         </div>
       </Router>
     </ThemeProvider>
-  </StrictMode>
-);
+  )
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+    <StrictMode>
+      <App/>
+      </StrictMode>
+)

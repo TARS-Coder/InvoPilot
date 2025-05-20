@@ -1,0 +1,43 @@
+/*Invoice Print */
+@page {
+    size: A4;
+    margin: 10mm;
+    color: #000000;
+}
+
+@media print {
+    body{
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+.invoice-container{
+    max-width: "800px";
+    border: "1px solid #ccc";
+    color: #000000;
+}
+
+.invoice-print-table .MuiTableCell-root{
+    color: black;
+}
+
+.invoice-print-table .MuiDivider-root{
+    border-color: rgba(19, 173, 55, 0.929);
+}
+
+.invoice-header{
+    break-inside: auto;
+}
+
+.invoice-summary{
+    break-inside: avoid;
+}
+
+.invoice-footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+}

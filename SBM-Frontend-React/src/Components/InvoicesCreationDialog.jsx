@@ -18,7 +18,7 @@ const InvoicesCreationDialog = ({ open, onClose, refreshInvoices, editInvoice })
     products: [],
     totalAmount: 0,
     totalTax: 0,
-    status: "draft", // can be "draft", "ready", "paid", etc.
+    status: "draft", // can be "draft", "balance-due", "paid", etc.
     payments: [],
     balance: 0
   }
@@ -106,8 +106,8 @@ const InvoicesCreationDialog = ({ open, onClose, refreshInvoices, editInvoice })
       balanceAmount -= p.amount
     })
 //    console.log(balanceAmount);
-    const newStatus = balanceAmount <= 0 ? "paid" : "draft";
-    setInvoice(prev => ({ ...prev, products, totalAmount, totalTax, balance: balanceAmount, status: newStatus }));
+//    const newStatus = balanceAmount <= 0 ? "paid" : "draft";
+    setInvoice(prev => ({ ...prev, products, totalAmount, totalTax, balance: balanceAmount }));
   };
 
   // New: Handle adding payments and updating balance.
@@ -117,7 +117,7 @@ const InvoicesCreationDialog = ({ open, onClose, refreshInvoices, editInvoice })
     const newPayments = [...invoiceState.payments, { amount: paymentAmt, date: new Date().toISOString() }];
     const newBalance = invoiceState.balance - paymentAmt;
     // Optionally update status if balance reaches zero.
-    const newStatus = newBalance <= 0 ? "paid" : invoiceState.status;
+    const newStatus = newBalance !== "draft" && newBalance <= 0 ? "paid" : invoiceState.status;
     setInvoice(prev => ({ ...prev, payments: newPayments, balance: newBalance, status: newStatus }));
     setPaymentAmount("");
   };
@@ -157,7 +157,8 @@ const InvoicesCreationDialog = ({ open, onClose, refreshInvoices, editInvoice })
               <Box flex={1.75} minWidth="300px">
                 <TextField label="Customer Name" fullWidth margin="normal" 
                   value={invoiceState.customerName || ""} 
-                  onChange={(e) => setInvoice({ ...invoiceState, customerName: e.target.value })} 
+                  onChange={(e) => setInvoice({ ...invoiceState, customerName: e.target.value })}
+                  disabled={editInvoice && editInvoice.status !== "draft"}
                   required 
                 />
               </Box>
@@ -166,6 +167,7 @@ const InvoicesCreationDialog = ({ open, onClose, refreshInvoices, editInvoice })
                 <TextField label="Date" fullWidth margin="normal" type="date" slotProps={{ inputLabel: { shrink: true } }}
                   value={invoiceState.specifiedDate ? new Date(invoiceState.specifiedDate).toISOString().split("T")[0] : ""}
                   onChange={(e) => setInvoice({ ...invoiceState, specifiedDate: e.target.value })}
+                  disabled={editInvoice && editInvoice.status !== "draft"}
                   required
                 />
               </Box>
@@ -176,6 +178,7 @@ const InvoicesCreationDialog = ({ open, onClose, refreshInvoices, editInvoice })
                 <TextField label="Address" fullWidth margin="normal" 
                   value={invoiceState.customerAddress || ""} 
                   onChange={(e) => setInvoice({ ...invoiceState, customerAddress: e.target.value })}
+                  disabled={editInvoice && editInvoice.status !== "draft"}
                 />
               </Box>
               <Box flex={1} minWidth="200px">
@@ -190,6 +193,7 @@ const InvoicesCreationDialog = ({ open, onClose, refreshInvoices, editInvoice })
                   input: { startAdornment: (<InputAdornment position="start"><CallIcon /></InputAdornment>) },
                   htmlInput: { maxLength: 10 }
                 }}
+                  disabled={editInvoice && editInvoice.status !== "draft"}
               />
               </Box>
             </Box>
@@ -216,9 +220,13 @@ const InvoicesCreationDialog = ({ open, onClose, refreshInvoices, editInvoice })
               <div key={index} style={{ marginBottom: 10, display: "flex", alignItems: "center", border: "1px solid rgba(0, 0, 0, 0.87)", padding: "3px 10px", borderRadius: "5px" }}>
                 <Box style={{ flex: 1 }}>
                   <Typography style={{display: "inline"}}> {p.name} (HSN: {p.hsnCode}) </Typography>
-                  <IconButton onClick={() => removeProductFromInvoice(index)} color="error">
-                    <DeleteForeverIcon />
-                  </IconButton>
+                  {
+                    editInvoice && (
+                    <IconButton onClick={() => removeProductFromInvoice(index)} color="error">
+                        <DeleteForeverIcon />
+                      </IconButton>
+                    )
+                  }
                 </Box>
                 <Box style={{ flex: 1}}>
                   <TextField 
@@ -233,6 +241,7 @@ const InvoicesCreationDialog = ({ open, onClose, refreshInvoices, editInvoice })
                       htmlInput: { maxLength: 6, min: 1}
                     }}
                     style={{ margin: "auto 10px", width: "100px" }}
+                  disabled={editInvoice && editInvoice.status !== "draft"}
                   />
                   <TextField 
                     label="Quantity" 
@@ -242,6 +251,7 @@ const InvoicesCreationDialog = ({ open, onClose, refreshInvoices, editInvoice })
                     value={p.quantity || 1}
                     onChange={(e) => updateProductDetails(index, "quantity", parseInt(e.target.value))}
                     style={{ margin: "auto 10px", width: "50px" }}
+                  disabled={editInvoice && editInvoice.status !== "draft"}
                   />
                   <TextField 
                     label="Tax (%)" 
@@ -254,6 +264,7 @@ const InvoicesCreationDialog = ({ open, onClose, refreshInvoices, editInvoice })
                       htmlInput:{min:0}
                     }}
                     style={{ margin: "auto 10px", width: "50px" }}
+                  disabled={editInvoice && editInvoice.status !== "draft"}
                   />
                   <TextField 
                     label="Total" 
@@ -266,6 +277,7 @@ const InvoicesCreationDialog = ({ open, onClose, refreshInvoices, editInvoice })
                       htmlInput:{min:0}
                     }}
                     style={{ margin: "auto 10px", width: "100px" }}
+                  disabled={editInvoice && editInvoice.status !== "draft"}
                   />
                 </Box>
               </div>

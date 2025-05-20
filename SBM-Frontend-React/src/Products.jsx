@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Products_list from "./Components/Products_list"
+import Products_list from "./components/Products_list"
 import actions from "./actions/productsActions";
 
 function Products() {

@@ -4,8 +4,10 @@ import { Container, Typography, Table, TableBody, TableCell, TableHead, TableRow
 const InvoicePrint = forwardRef(({ invoice }, ref) => {
   return (
     <div ref={ref}>
-    <Container style={{ padding: "20px 30px", maxWidth: "800px", border: "1px solid #ccc" }}>
+    <title>{invoice.invoiceNumber}</title>
+    <Container className="invoice-container">
       {/* Header Section */}
+      <div className="invoice-header">
       <div style={{ display: "flex", justifyContent: "space-between"}}>
         <div>
           <img src="../logo.png" alt="Company Logo" style={{ height: "75px", marginBottom: "-12px" }} />
@@ -21,7 +23,7 @@ const InvoicePrint = forwardRef(({ invoice }, ref) => {
             {
               {
                 "draft": " Draft Invoice",
-                "ready": "Payment Due",
+                "partial": " Paid + Due",
                 "paid": " Paid"
               }[invoice.status]
             }</Typography>
@@ -38,7 +40,7 @@ const InvoicePrint = forwardRef(({ invoice }, ref) => {
       <Divider style={{ margin: "10px 0" }} />
 
       {/* Product Table */}
-      <Table size="small">
+      <Table size="small" className="invoice-print-table">
         <TableHead>
           <TableRow>
           <TableCell><b>#</b></TableCell>
@@ -63,25 +65,28 @@ const InvoicePrint = forwardRef(({ invoice }, ref) => {
         </TableBody>
       </Table>
       
-      <Divider style={{ margin: "10px 0" }} />
+      <Divider style={{ margin: "10px 0", borderColor: "rgba(0, 0, 0, 0.12)" }} />
+      </div>
       
       {/* Total Amounts */}
+      <div className="invoice-summary">
       <Typography variant="h6" align="right">Subtotal: ₹{invoice.totalAmount-invoice.totalTax}</Typography>
       <Typography variant="body1" align="right">Total Tax: ₹{invoice.totalTax}</Typography>
       <Typography variant="h6" align="right"><b>Total: ₹{invoice.totalAmount}</b></Typography>
       <Typography variant="body1" align="right">Balance Due: ₹{invoice.balance}</Typography>
       
-      <Divider style={{ margin: "10px 0" }} />
-      
+      <Divider style={{ margin: "10px 0", borderColor: "rgba(0, 0, 0, 0.12)" }} />
       {/* Signature */}
       <Typography variant="body1" align="right" padding={"0 25px 25px 0"}>Issued by:</Typography>
-      
-      <Divider style={{ margin: "10px 0" }} />
+      </div>
       
       {/* Footer */}
+      <div className="invoice-footer">
+      <Divider style={{ margin: "10px 0", borderColor: "rgba(0, 0, 0, 0.12)" }} />
       <Typography variant="body2" align="center" position={"bottom"}>
         Thank you for your business! | Email: contact@sbmotors.com | Phone: +91 9876543210
       </Typography>
+      </div>
     </Container>
       </div>
   );
